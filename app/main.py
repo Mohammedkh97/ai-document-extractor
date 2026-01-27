@@ -24,7 +24,7 @@ async def lifespan(app: FastAPI):
     print(f"🤖 LLM Model: {settings.llm_model}")
     if settings.frappe_url:
         print(f"🔗 Frappe URL: {settings.frappe_url}")
-    
+    print(f"🌍 Allowed CORS Origins: {settings.cors_origins_list}")
     yield
     
     # Shutdown

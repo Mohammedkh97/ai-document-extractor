@@ -205,6 +205,8 @@ POST /api/v1/webhooks/frappe
 
 ### Setting up Webhooks in Frappe
 
+For a detailed step-by-step guide on setting up the Frappe side, resolving permissions, and creating DocTypes, please refer to the [Integration Plan](INTEGRATION_PLAN.md).
+
 1. Go to **Frappe > Webhook**
 2. Create a new webhook:
    - **DocType**: Your document DocType (e.g., "Employee Document")

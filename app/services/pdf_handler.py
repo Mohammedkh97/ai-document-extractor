@@ -34,7 +34,7 @@ class PDFHandler:
             PDF bytes or None if download fails
         """
         try:
-            async with httpx.AsyncClient(timeout=self.timeout) as client:
+            async with httpx.AsyncClient(timeout=self.timeout, verify=False) as client:
                 response = await client.get(url)
                 response.raise_for_status()
                 return response.content
