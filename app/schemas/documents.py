@@ -18,6 +18,8 @@ class DocumentType(str, Enum):
     HEALTHCARE = "Healthcare Professional Registration Certificate"
     PASSPORT = "Passport"
     TENANCY_CONTRACT = "Tenancy Contract"
+    GRADUATION_CERTIFICATE = "Graduation Certificate"
+    DRIVING_LICENSE = "Driving License"
     UNKNOWN = "Unknown"
 
 
@@ -126,7 +128,10 @@ class PassportData(BaseModel):
     nationality: Optional[str] = Field(None, description="Nationality")
     place_of_birth: Optional[str] = Field(None, description="Place of birth")
 
-
+class GraduationCertificateData(BaseModel):
+    """Graduation certificate extracted data."""
+    name: Optional[str] = Field(None, description="Full name")
+    
 class TenancyContractData(BaseModel):
     """Tenancy contract extracted data."""
     tenant_name: Optional[str] = Field(None, description="Name of tenant")
@@ -144,6 +149,39 @@ class TenancyContractData(BaseModel):
     expiry_date: Optional[str] = Field(
         None, description="Expiry date (DD/MM/YYYY)"
     )
+
+
+class GraduationCertificateData(BaseModel):
+    """Graduation certificate extracted data."""
+    full_name: Optional[str] = Field(None, description="Full Name")
+    nationality: Optional[str] = Field(None, description="Nationality")
+    date_of_birth: Optional[str] = Field(
+        None, description="Date of birth (DD/MM/YYYY)"
+    )
+    cumulative_estimation: Optional[str] = Field(
+        None, description="Cumulative estimation (acceptable, good, very good, excellent)"
+    )
+    major: Optional[str] = Field(None, description="College and university major")
+    gpa: Optional[str] = Field(None, description="GPA")
+    graduation_year: Optional[str] = Field(None, description="Year Of Graduation")
+    university_name: Optional[str] = Field(None, description="Name Of University")
+
+
+class DrivingLicenseData(BaseModel):
+    """Driving license extracted data."""
+    country_name: Optional[str] = Field(None, description="Country name")
+    full_name: Optional[str] = Field(None, description="FullName")
+    nationality: Optional[str] = Field(None, description="Nationality")
+    date_of_birth: Optional[str] = Field(
+        None, description="Date Of Birth (DD/MM/YYYY)"
+    )
+    issue_date: Optional[str] = Field(
+        None, description="Issue Date (DD/MM/YYYY)"
+    )
+    expiry_date: Optional[str] = Field(
+        None, description="Expiry Date (DD/MM/YYYY)"
+    )
+    place_of_issue: Optional[str] = Field(None, description="Place Of Issue")
 
 
 class DocumentSchema(BaseModel):
@@ -173,7 +211,12 @@ class DocumentSchema(BaseModel):
     tenancy_details: Optional[TenancyContractData] = Field(
         None, description="Extracted tenancy contract details"
     )
-
+    graduation_details: Optional[GraduationCertificateData] = Field(
+        None, description="Extracted graduation certificate details"
+    )
+    driving_license_details: Optional[DrivingLicenseData] = Field(
+        None, description="Extracted driving license details"
+    )
 
 # Mapping from document type to the relevant details field
 DOCUMENT_TYPE_FIELD_MAP = {
@@ -185,4 +228,6 @@ DOCUMENT_TYPE_FIELD_MAP = {
     DocumentType.HEALTHCARE: "healthcare_details",
     DocumentType.PASSPORT: "passport_details",
     DocumentType.TENANCY_CONTRACT: "tenancy_details",
+    DocumentType.GRADUATION_CERTIFICATE: "graduation_details",
+    DocumentType.DRIVING_LICENSE: "driving_license_details",
 }

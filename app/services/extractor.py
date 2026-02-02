@@ -30,6 +30,8 @@ The document type could be one of the following:
 - Passport
 - Healthcare Professional Registration Certificate
 - Tenancy Contract
+- Graduation Certificate
+- Driving License
 
 Based on the document type detected, extract the relevant fields:
 
@@ -53,6 +55,12 @@ Based on the document type detected, extract the relevant fields:
 
 **For Tenancy Contract:**
 - tenant_name, property_no, start_date, end_date, license_no, registration_date, expiry_date
+
+**For Graduation Certificate:**
+- full_name, nationality, date_of_birth, cumulative_estimation (acceptable, good, very good, excellent), major, gpa, graduation_year, university_name
+
+**For Driving License:**
+- country_name, full_name, nationality, date_of_birth, issue_date, expiry_date, place_of_issue
 
 IMPORTANT:
 - All dates should be in DD/MM/YYYY format
