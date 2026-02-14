@@ -11,10 +11,10 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
-      - ./app:/app/app  # Hot reload in development
+      - ./app:/app/app # Hot reload in development
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -23,21 +23,20 @@ services:
       - frappe-production_default
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ai-extractor.rule=Host(`erp.72.61.114.66.nip.io`) && PathPrefix(`/api/ai-extractor`)"
+      - "traefik.http.routers.ai-extractor.rule=Host(`erp.pro-shazmlc.cloud`) && PathPrefix(`ai-extractor`)"
       - "traefik.http.routers.ai-extractor.priority=100"
-      - "traefik.http.middlewares.ai-extractor-strip.stripprefix.prefixes=/api/ai-extractor"
+      - "traefik.http.middlewares.ai-extractor-strip.stripprefix.prefixes=ai-extractor"
       - "traefik.http.routers.ai-extractor.middlewares=ai-extractor-strip"
       - "traefik.http.routers.ai-extractor.entrypoints=websecure"
       - "traefik.http.routers.ai-extractor.tls.certresolver=main-resolver"
       - "traefik.http.services.ai-extractor.loadbalancer.server.port=8000"
-
 
   # Development service with auto-reload
   api-dev:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ai-document-extractor-dev
+    container_name: ai-document-extractor
     ports:
       - "8000:8000"
     env_file:
