@@ -29,8 +29,8 @@ class ExtractFromUrlRequest(BaseModel):
 
 class FrappeWebhookRequest(BaseModel):
     """Request schema for Frappe webhook events."""
-    event: str = Field(
-        ...,
+    event: Optional[str] = Field(
+        "on_change",
         description="Webhook event type (e.g., 'after_insert', 'on_update')"
     )
     doctype: str = Field(
@@ -39,6 +39,7 @@ class FrappeWebhookRequest(BaseModel):
     )
     docname: str = Field(
         ...,
+        validation_alias="name",
         description="Document name in Frappe"
     )
     document_url: Optional[str] = Field(
@@ -46,6 +47,6 @@ class FrappeWebhookRequest(BaseModel):
         description="URL of the attached document"
     )
     attachment_field: Optional[str] = Field(
-        None,
+        "document_file",
         description="Field name containing the attachment"
     )
